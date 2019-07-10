@@ -14,7 +14,19 @@
 </head>
 <body>
 <h1>HI</h1>
+<?php
+/*Репортим любые ошибки */
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
+/*Определяем переменную РУТ и подключаем роутер*/
+define('ROOT',dirname('__FILE__'));
+print_r(ROOT);
+require_once(ROOT.'/components/Router.php');
+
+$alpha = new Router();
+$alpha->run();
+?>
 
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="resources/js/materialize.js"></script>
