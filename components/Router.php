@@ -4,8 +4,7 @@
 class Router
 {
     private $routes;
-    private $controllerName;
-    private $actionName;
+
     /**
      * Router constructor.
      */
@@ -29,11 +28,23 @@ class Router
         foreach ($this->routes as $uriPattern=>$path){
             if (preg_match("~\b$uriPattern\b~", $url)){
                 $segments = explode('/',$path);
-                $this->controllerName = array_shift($segments)."Controller";
-                $this->actionName = "action".ucfirst(array_shift($segments));
+                $controllerName = array_shift($segments)."Controller";
+                $actionName = "action".ucfirst(array_shift($segments));
+
+
+                $controllersFileName = ROOT."/controller/$controllerName.php";
+                if (file_exists($controllersFileName)){include_once($controllersFileName);}
+
+
+                $objectController = new $controllerName;
+                $result = $objectController->$actionName();
+                if ($result!=null) break;
+
+
+                echo "<p> $controllerName $actionName </p>";
+
             }
         }
-        echo "<p> $this->controllerName $this->actionName </p>";
     }
 
 }
