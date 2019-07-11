@@ -48,9 +48,11 @@ class Router
                 $controllersFileName = ROOT."/controller/$controllerName.php";
                 if (file_exists($controllersFileName)){include_once($controllersFileName);}
 
-                /*Создаем класс контроллера и запускаем экшин*/
+                /*Создаем класс контроллера*/
                 $objectController = new $controllerName;
-                $result = $objectController->$actionName($parameters);
+
+                /*Передаем в класса контроллера(объект создан) в функцию параметры*/
+                $result = call_user_func_array(array($objectController,$actionName),$parameters);
                 if ($result!=null) break;
 
 
