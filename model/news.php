@@ -31,10 +31,15 @@ class news
         $stm=$db->prepare("SELECT * FROM news where id=?");
         $stm->execute(array($idNews));
 
-        $stm->setFetchMode(PDO::FETCH_ASSOC);
+        $newsList = array();
 
-        $result=$stm->fetch();
-
-        return $result;
+        $i=0;
+        while ($row=$stm->fetch()){
+            $newsList[$i]['id']=$row['id'];
+            $newsList[$i]['title']=$row['title'];
+            $newsList[$i]['news']=$row['news'];
+            $i++;
+        }
+        return $newsList;
     }
 }

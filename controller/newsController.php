@@ -14,8 +14,8 @@ class newsController
     public function actionView($newsID)
     {
 
-        $newsItem=news::getNewsById($newsID);
-        print_r($newsItem);
+        $newsList=news::getNewsById($newsID);
+        require_once (ROOT.'/view/newsView.php');
         return true;
     }
 }
