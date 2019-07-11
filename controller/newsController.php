@@ -7,8 +7,7 @@ class newsController
     public function actionIndex()
     {
         $newsList = news::getAllNews();
-        print_r($newsList);
-        echo "newsController actionIndex()";
+        require_once (ROOT.'/view/newsView.php');
         return true;
     }
 
