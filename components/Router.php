@@ -41,17 +41,16 @@ class Router
                 $controllerName = array_shift($segments)."Controller"; //название класса для контроллера
                 $actionName = "action".ucfirst(array_shift($segments)); //название метода для экшина
 
+                //Получаем оставшуюся строку(параметры как глобальный массив $_GET[])
                 $parameters=$segments;
-                print_r($parameters);
 
-                die();
-
-                $controllersFileName = ROOT."/controller/$controllerName.php"; //ищем класс контроллера
-                if (file_exists($controllersFileName)){include_once($controllersFileName);} //подключаем
+                //ищем класс контроллера и подключаем его
+                $controllersFileName = ROOT."/controller/$controllerName.php";
+                if (file_exists($controllersFileName)){include_once($controllersFileName);}
 
                 /*Создаем класс контроллера и запускаем экшин*/
                 $objectController = new $controllerName;
-                $result = $objectController->$actionName();
+                $result = $objectController->$actionName($parameters);
                 if ($result!=null) break;
 
 

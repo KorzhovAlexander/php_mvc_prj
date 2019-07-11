@@ -9,9 +9,9 @@ class newsController
         return true;
     }
 
-    public function actionView()
+    public function actionView($param)
     {
-        echo "Просмотр одной новости";
+        echo "<h5>$param[0]</h5>";
         return true;
     }
 }
