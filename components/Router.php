@@ -54,10 +54,6 @@ class Router
                 /*Передаем в класса контроллера(объект создан) в функцию параметры*/
                 $result = call_user_func_array(array($objectController,$actionName),$parameters);
                 if ($result!=null) break;
-
-
-                echo "<p> $controllerName $actionName </p>";
-
             }
         }
     }
