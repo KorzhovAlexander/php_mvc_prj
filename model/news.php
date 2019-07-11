@@ -4,42 +4,36 @@
 
 class news
 {
-    public static function getAllNews()
+    private static function DBdateToArray($DBdate)
     {
-        $db=DAO::getConnection();
-
         $newsList = array();
 
-        $result = $db->query("SELECT * FROM news");
-
         $i=0;
-        while ($row=$result->fetch()){
+        while ($row=$DBdate->fetch()){
             $newsList[$i]['id']=$row['id'];
             $newsList[$i]['title']=$row['title'];
             $newsList[$i]['news']=$row['news'];
             $i++;
         }
+
         return $newsList;
+    }
+
+    public static function getAllNews()
+    {
+        $db=DAO::getConnection();
+        $result = $db->query("SELECT * FROM news");
+
+        return self::DBdateToArray($result);
     }
 
     public static function getNewsById($idNews)
     {
         $idNews=intval($idNews);
-
         $db=DAO::getConnection();
-
         $stm=$db->prepare("SELECT * FROM news where id=?");
         $stm->execute(array($idNews));
 
-        $newsList = array();
-
-        $i=0;
-        while ($row=$stm->fetch()){
-            $newsList[$i]['id']=$row['id'];
-            $newsList[$i]['title']=$row['title'];
-            $newsList[$i]['news']=$row['news'];
-            $i++;
-        }
-        return $newsList;
+        return self::DBdateToArray($stm);
     }
 }
