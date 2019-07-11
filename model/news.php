@@ -1,17 +1,13 @@
 <?php
 
+include_once ROOT.'/components/DAO.php';
+
 
 class news
 {
     public static function getAllNews()
     {
-        $host='localhost';
-        $dbname='webapp';
-        $user='phpmyadmin';
-        $password='745263AA';
-        $charset='UTF8';
-
-        $db=new PDO("mysql:host=$host;dbname=$dbname;charset=$charset",$user,$password);
+        $db=DAO::getConnection();
 
         $newsList = array();
 
@@ -29,6 +25,17 @@ class news
 
     public static function getNewsById($idNews)
     {
+        $idNews=intval($idNews);
 
+        $db=DAO::getConnection();
+
+        $stm=$db->prepare("SELECT * FROM news where id=?");
+        $stm->execute(array($idNews));
+
+        $stm->setFetchMode(PDO::FETCH_ASSOC);
+
+        $result=$stm->fetch();
+
+        return $result;
     }
 }

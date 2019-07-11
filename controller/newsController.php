@@ -16,7 +16,8 @@ class newsController
     public function actionView($newsID)
     {
 
-        echo "<h5>$newsID</h5>";
+        $newsItem=news::getNewsById($newsID);
+        print_r($newsItem);
         return true;
     }
 }
