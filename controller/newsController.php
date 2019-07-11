@@ -1,5 +1,6 @@
 <?php
 
+include_once ROOT.'/model/news.php';
 
 class newsController
 {
