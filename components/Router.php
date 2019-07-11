@@ -33,11 +33,18 @@ class Router
              то создаем контроллер(и вызываем экшин)*/
             if (preg_match("~\b$uriPattern\b~", $url)){
 
+                //Получаем внутренний путь из внешнего, согласно правилу (рег. выражение)
+                $internalRoute = preg_replace("~\b$uriPattern\b~",$path,$url);
+
                 //разбиваем полученный путь на массив (контроллер и экшин)
-                $segments = explode('/',$path);
+                $segments = explode('/',$internalRoute);
                 $controllerName = array_shift($segments)."Controller"; //название класса для контроллера
                 $actionName = "action".ucfirst(array_shift($segments)); //название метода для экшина
 
+                $parameters=$segments;
+                print_r($parameters);
+
+                die();
 
                 $controllersFileName = ROOT."/controller/$controllerName.php"; //ищем класс контроллера
                 if (file_exists($controllersFileName)){include_once($controllersFileName);} //подключаем
