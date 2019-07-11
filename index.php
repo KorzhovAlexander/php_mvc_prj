@@ -25,6 +25,7 @@ error_reporting(E_ALL);
 define('ROOT',dirname('__FILE__'));
 //print_r(ROOT);
 require_once(ROOT.'/components/Router.php');
+require_once ROOT.'/components/DAO.php';
 
 $alpha = new Router();
 $alpha->run();

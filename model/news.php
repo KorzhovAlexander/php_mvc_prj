@@ -1,6 +1,5 @@
 <?php
 
-include_once ROOT.'/components/DAO.php';
 
 
 class news
